@@ -1,14 +1,30 @@
 import React from "react";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import MarkdownText from "../context/markdown";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
 const Menu = () => {
   const { markdown, setMarkdown } = useContext(MarkdownText);
+  const [templates, setTemplates] = useState([]);
 
   const resetMarkdown = () => {
     setMarkdown("");
   };
+
+  const requestForTemplates = async () => {
+    const data = await fetch("http://localhost:5000");
+    const json = await data.json();
+
+    setTemplates(json);
+  };
+
+  const addTemplate = (temp) => {
+    setMarkdown(markdown + "\n" + temp);
+  };
+
+  useEffect(() => {
+    requestForTemplates();
+  }, []);
 
   return (
     <div className="px-4 divide-y ">
@@ -17,18 +33,16 @@ const Menu = () => {
         <p className="text-sm pt-14 text-gray-500 pb-2">
           Append ready made templates
         </p>
-        <div className="w-full border rounded-md text-center py-2 mt-2 cursor-pointer shadow-sm hover:shadow-md text-gray-500 hover:text-gray-600">
-          Template 1
-        </div>
-        <div className="w-full border rounded-md text-center py-2 mt-2 cursor-pointer shadow-sm hover:shadow-md text-gray-500 hover:text-gray-600">
-          Template 2
-        </div>
-        <div className="w-full border rounded-md text-center py-2 mt-2 cursor-pointer shadow-sm hover:shadow-md text-gray-500 hover:text-gray-600">
-          Template 3
-        </div>
-        <div className="w-full border rounded-md text-center py-2 mt-2 cursor-pointer shadow-sm hover:shadow-md text-gray-500 hover:text-gray-600">
-          Template 4
-        </div>
+        {templates.length &&
+          templates.map((temp) => (
+            <div
+              key={temp.title}
+              onClick={() => addTemplate(temp.fileData)}
+              className="w-full border rounded-md text-center py-2 mt-2 cursor-pointer shadow-sm hover:shadow-md text-gray-500 hover:text-gray-600"
+            >
+              {temp.title}
+            </div>
+          ))}
       </div>
 
       {/* options  */}
