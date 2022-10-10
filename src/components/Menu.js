@@ -2,6 +2,7 @@ import React from "react";
 import { useContext, useEffect, useState } from "react";
 import MarkdownText from "../context/markdown";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import env from "react-dotenv";
 
 const Menu = () => {
   const { markdown, setMarkdown } = useContext(MarkdownText);
@@ -12,7 +13,7 @@ const Menu = () => {
   };
 
   const requestForTemplates = async () => {
-    const data = await fetch("http://localhost:5000");
+    const data = await fetch(env.API_URL);
     const json = await data.json();
 
     setTemplates(json);
