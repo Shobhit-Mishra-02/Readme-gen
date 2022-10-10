@@ -13,7 +13,7 @@ const Menu = () => {
   };
 
   const requestForTemplates = async () => {
-    const data = await fetch(env.API_URL);
+    const data = await fetch(env.API_URL || process.env.API_URL);
     const json = await data.json();
 
     setTemplates(json);
