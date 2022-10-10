@@ -1,31 +1,19 @@
-import React from "react";
-import { useContext, useEffect, useState } from "react";
-import MarkdownText from "../context/markdown";
+import React, { useContext } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import env from "react-dotenv";
+import MarkdownText from "../context/markdown";
+import useTemplates from "../hooks/getTemplates";
 
 const Menu = () => {
   const { markdown, setMarkdown } = useContext(MarkdownText);
-  const [templates, setTemplates] = useState([]);
+  const { templates } = useTemplates();
 
   const resetMarkdown = () => {
     setMarkdown("");
   };
 
-  const requestForTemplates = async () => {
-    const data = await fetch(env.API_URL || process.env.API_URL);
-    const json = await data.json();
-
-    setTemplates(json);
-  };
-
   const addTemplate = (temp) => {
     setMarkdown(markdown + "\n" + temp);
   };
-
-  useEffect(() => {
-    requestForTemplates();
-  }, []);
 
   return (
     <div className="px-4 divide-y ">
