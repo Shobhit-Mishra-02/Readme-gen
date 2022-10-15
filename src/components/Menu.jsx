@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import MarkdownText from "../context/markdown";
 import useTemplates from "../hooks/getTemplates";
+import { BiLoaderAlt } from "react-icons/bi";
 
 const Menu = () => {
   const { markdown, setMarkdown } = useContext(MarkdownText);
@@ -23,7 +24,7 @@ const Menu = () => {
           Append ready made templates
         </p>
         <div className="h-[350px] py-4 overflow-auto px-2 border rounded-md">
-          {templates.length &&
+          {templates.length ? (
             templates.map((temp) => (
               <div
                 key={temp.title}
@@ -32,7 +33,12 @@ const Menu = () => {
               >
                 {temp.title}
               </div>
-            ))}
+            ))
+          ) : (
+            <div className="flex justify-center align-middle items-center h-full">
+              <BiLoaderAlt className="w-8 h-8 animate-spin text-gray-500" />
+            </div>
+          )}
         </div>
       </div>
 

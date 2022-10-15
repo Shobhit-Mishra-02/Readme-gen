@@ -1,10 +1,14 @@
 import InputAreas from "./components/InputAreas";
 import Menu from "./components/Menu";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MarkdownText from "./context/markdown";
 
 function App() {
   const [markdown, setMarkdown] = useState("");
+
+  useEffect(() => {
+    document.title = "Readme Gen";
+  }, []);
 
   return (
     <div>
@@ -15,7 +19,7 @@ function App() {
           </div>
           <div className="w-full">
             <div className="text-center text-3xl py-6 text-gray-500">
-              <h2>Markdown generator</h2>
+              <h2>Readme generator</h2>
             </div>
             <InputAreas />
           </div>
