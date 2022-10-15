@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import MarkdownText from "../context/markdown";
+import remarkGfm from "remark-gfm";
 
 const InputAreas = () => {
   const { markdown, setMarkdown } = useContext(MarkdownText);
@@ -23,7 +24,7 @@ const InputAreas = () => {
           className="prose overflow-auto prose-sm border focus:outline-none p-2 rounded-md w-[500px] h-[550px]"
           id="markdown"
         >
-          <ReactMarkdown>{markdown}</ReactMarkdown>
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>{markdown}</ReactMarkdown>
         </article>
       </div>
     </div>

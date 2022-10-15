@@ -22,20 +22,22 @@ const Menu = () => {
         <p className="text-sm pt-14 text-gray-500 pb-2">
           Append ready made templates
         </p>
-        {templates.length &&
-          templates.map((temp) => (
-            <div
-              key={temp.title}
-              onClick={() => addTemplate(temp.fileData)}
-              className="w-full border rounded-md text-center py-2 mt-2 cursor-pointer shadow-sm hover:shadow-md text-gray-500 hover:text-gray-600"
-            >
-              {temp.title}
-            </div>
-          ))}
+        <div className="h-[350px] py-4 overflow-auto px-2 border rounded-md">
+          {templates.length &&
+            templates.map((temp) => (
+              <div
+                key={temp.title}
+                onClick={() => addTemplate(temp.fileData)}
+                className="w-full border rounded-md text-center py-2 mt-2 cursor-pointer shadow-sm hover:shadow-md text-gray-500 hover:text-gray-600"
+              >
+                {temp.title}
+              </div>
+            ))}
+        </div>
       </div>
 
       {/* options  */}
-      <div className=" pt-6 space-y-2">
+      <div className=" pt-6 space-y-2 px-2">
         <p className="pb-2 text-sm text-gray-500">Other options</p>
         <div
           className="w-full border rounded-md text-center py-2 cursor-pointer shadow-sm hover:shadow-md text-gray-500 hover:text-gray-600"
