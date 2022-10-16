@@ -1,6 +1,13 @@
 # Readme generator project
 
-This is a react application with allows the user to create or customize the markdown.
+This is a react application which allows the user to create or customize the read me file. This application has got two parts frontend and backend, to visite the backend repo [click here](https://github.com/Shobhit-Mishra-02/Readme-gen).
+
+> here is [demo](https://distinct-stole-fly.cyclic.app/)
+
+## Prerequsite
+- javascript
+- react js
+- tailwind css
 
 ## Quick start
 
@@ -16,8 +23,6 @@ npm install
 ```shell
 npm run dev
 ```
-
-> here is [demo](https://distinct-stole-fly.cyclic.app/)
 
 ## Contributions are most welcome
 
