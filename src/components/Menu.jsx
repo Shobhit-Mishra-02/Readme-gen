@@ -1,16 +1,26 @@
 import React, { useContext } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import { BiLoaderAlt } from "react-icons/bi";
+import { FiSun, FiMoon } from "react-icons/fi";
+import DarkMode from "../context/darkmode";
 import MarkdownText from "../context/markdown";
 import useTemplates from "../hooks/getTemplates";
-import { BiLoaderAlt } from "react-icons/bi";
-import { FiSun } from "react-icons/fi";
 
 const Menu = () => {
   const { markdown, setMarkdown } = useContext(MarkdownText);
+  const { mode, setMode } = useContext(DarkMode);
   const { templates } = useTemplates();
 
   const resetMarkdown = () => {
     setMarkdown("");
+  };
+
+  const changeMode = () => {
+    if (mode.length) {
+      setMode("");
+    } else {
+      setMode("dark");
+    }
   };
 
   const addTemplate = (temp) => {
@@ -22,7 +32,17 @@ const Menu = () => {
       {/* template options  */}
       <div className="pb-6">
         <div className="pt-10 flex justify-end">
-          <FiSun className="dark:text-white w-8 h-8 cursor-pointer hover:text-gray-200" />
+          {mode.length ? (
+            <FiSun
+              className="text-gray-500 hover:text-gray-600 dark:text-white w-8 h-8 cursor-pointer"
+              onClick={changeMode}
+            />
+          ) : (
+            <FiMoon
+              className="text-gray-500 hover:text-gray-600 dark:text-white w-8 h-8 cursor-pointer"
+              onClick={changeMode}
+            />
+          )}
         </div>
         <p className="text-sm pt-8 text-gray-500 pb-2 dark:text-white">
           Append ready made templates
